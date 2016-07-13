@@ -1,5 +1,15 @@
 from flask import Flask, render_template
+from flask_mongoengine import MongoEngine
+
+'''App configuration'''
 app = Flask(__name__)
+app.config['MONGODB_SETTINGS'] = {
+    'db': 'consultorio'
+}
+db = MongoEngine(app)
+
+
+'''App Views'''
 
 
 @app.route('/')
