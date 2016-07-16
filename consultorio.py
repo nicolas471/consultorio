@@ -1,12 +1,17 @@
 from flask import Flask, render_template
 from flask_mongoengine import MongoEngine
+from flask_admin import Admin
 
 '''App configuration'''
-db = MongoEngine()
+
 app = Flask(__name__)
 app.config['MONGODB_SETTINGS'] = {
     'db': 'consultorio'
 }
+
+''' db init '''
+
+db = MongoEngine()
 db.init_app(app)
 
 
