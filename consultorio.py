@@ -27,6 +27,9 @@ class Member(db.Document):
     rol = db.StringField(required=True, choices=(
                         'Actriz', 'Director', 'Tecnica'))
 
+    def __unicode__(self):
+        return self.name
+
 
 class Theatre(db.Document):
     name = db.StringField(max_lenght=30, required=True)
@@ -35,9 +38,15 @@ class Theatre(db.Document):
     city = db.StringField(max_lenght=15)
     email = db.EmailField()
 
+    def __unicode__(self):
+        return self.name
+
 
 class Genre(db.Document):
     name = db.StringField(max_lenght=15)
+
+    def __unicode__(self):
+        return self.name
 
 
 class Play(db.Document):
@@ -47,6 +56,9 @@ class Play(db.Document):
     current_theater = db.ReferenceField(Theatre, required=True)
     members = db.ListField(db.ReferenceField(Member))
     book = db.ListField(db.ImageField())
+
+    def __unicode__(self):
+        return self.title
 
 
 # for index page configuration
