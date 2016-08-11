@@ -65,17 +65,35 @@ class Play(db.Document):
     def __unicode__(self):
         return self.title
 
-'''Admin Views TODO'''
-
-
-class MenberView(ModelView):
-    column_filters = ['name']
-
 
 # for index page configuration
 class Cover(db.Document):
     num_images = db.IntField(required=True, max_value=3)
     images = db.ListField(db.ImageField(), required=True)
+
+
+'''Admin Views TODO'''
+
+
+class MemberView(ModelView):
+    column_filters = ['name']
+
+
+class TheatreView(ModelView):
+    column_filters = ['name']
+
+
+class PlayView(ModelView):
+    column_filters= ['title']
+
+
+class GenreView(ModelView):
+    column_filters = ['name']
+
+
+class CoverView(ModelView):
+    pass
+
 
 '''App Views'''
 
@@ -101,10 +119,14 @@ def contact():
 
 if __name__ == '__main__':
     '''Create admin'''
-    admin = admin.Admin(app, 'Test:Consultorio')
+    admin = admin.Admin(app, 'Consultorio Teatro')
 
     '''Add Views TODO'''
-    admin.add_view(MenberView(Member))
+    admin.add_view(MemberView(Member))
+    admin.add_view(TheatreView(Theatre))
+    admin.add_view(PlayView(Play))
+    admin.add_view(GenreView(Genre))
+    admin.add_view(CoverView(Cover))
 
     '''App Run'''
     app.run(debug=True)
