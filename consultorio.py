@@ -62,7 +62,7 @@ class Play(db.Document):
     def __unicode__(self):
         return self.title
 
-'''Admin Views'''
+'''Admin Views TODO'''
 
 
 class MenberView(ModelView):
@@ -100,7 +100,7 @@ if __name__ == '__main__':
     '''Create admin'''
     admin = admin.Admin(app, 'Test:Consultorio')
 
-    '''Add Views'''
+    '''Add Views TODO'''
     admin.add_view(MenberView(Member))
 
     '''App Run'''
