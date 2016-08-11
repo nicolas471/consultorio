@@ -9,6 +9,7 @@ import flask_admin as admin
 '''App configuration'''
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = '1234567890'
 app.config['MONGODB_SETTINGS'] = {
     'db': 'consultorio'
 }
