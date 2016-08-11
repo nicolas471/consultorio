@@ -1,6 +1,8 @@
 from flask import Flask, render_template
 from flask_mongoengine import MongoEngine
-from flask_admin import Admin
+from flask_admin.form import rules
+from flask_admin.contrib.mongoengine import ModelView
+import flask_admin as admin
 
 '''App configuration'''
 
@@ -60,6 +62,12 @@ class Play(db.Document):
     def __unicode__(self):
         return self.title
 
+'''Admin Views'''
+
+
+class MenberView(ModelView):
+    column_filters = ['name']
+
 
 # for index page configuration
 class Cover(db.Document):
@@ -89,4 +97,11 @@ def contact():
     return render_template('base_contacto.html')
 
 if __name__ == '__main__':
-    app.run()
+    '''Create admin'''
+    admin = admin.Admin(app, 'Test:Consultorio')
+
+    '''Add Views'''
+    admin.add_view(MenberView(Member))
+
+    '''App Run'''
+    app.run(debug=True)
