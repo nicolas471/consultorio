@@ -60,6 +60,7 @@ class Play(db.Document):
     genre = db.ReferenceField(Genre, required=True)
     current_theater = db.ReferenceField(Theatre, required=True)
     members = db.ListField(db.ReferenceField(Member))
+    '''FIXME'''
     book = db.ListField(db.ImageField())
 
     def __unicode__(self):
@@ -68,6 +69,7 @@ class Play(db.Document):
 
 # for index page configuration
 class Cover(db.Document):
+    '''FIXME'''
     num_images = db.IntField(required=True, max_value=3)
     images = db.ListField(db.ImageField(), required=True)
 
@@ -76,19 +78,71 @@ class Cover(db.Document):
 
 
 class MemberView(ModelView):
-    column_filters = ['name']
+    column_filters = ['name', 'rol']
+    column_searcheable_list = ['name']
+    column_labels = dict(
+        name='Nombre',
+        last_name='Apellido',
+        birthdate='Fecha de Nacimiento',
+        profile_picture='Foto de Perfil'
+    )
+    column_descriptions = dict(
+        profile_picture='Imagen que se visualiza el Perfil de los integrantes'
+
+    )
+    column_editable_list = ('name', 'last_name')
+    form_args = dict(
+        name=dict(label='Nombre'),
+        last_name=dict(label='Apellido'),
+        birthdate=dict(label='Fecha de Nacimiento'),
+        profile_picture=dict(label='Foto de Perfil'),
+        rol=dict(label='Rol')
+    )
 
 
 class TheatreView(ModelView):
     column_filters = ['name']
+    column_labels = dict(
+        borough='Barrio',
+        city='Ciudad',
+        direction='Direccion',
+        name='Nombre'
+    )
+    column_searcheable_list = ['name']
+    column_editable_list = ['name']
+    form_args = dict(
+        borough=dict(label='Barrio'),
+        city=dict(label='Barrio'),
+        direction=dict(label='Direccion'),
+        name=dict(label='Nombre')
+    )
 
 
 class PlayView(ModelView):
-    column_filters= ['title']
+    column_filters = ['title']
+    column_labels = dict(
+        title='Titulo',
+        members='Elenco',
+        release_date='Fecha de Estreno',
+        current_theater='Sala Actual',
+        book='Libro?'
+    )
+    column_searcheable_list = ['title']
+    form_args = dict(
+        title=dict(label='Titulo'),
+        members=dict(label='Elenco'),
+        release_date=dict(label='Fecha de Estreno'),
+        current_theater=dict(label='Sala Actual'),
+        book=dict(label='Libro')
+    )
 
 
 class GenreView(ModelView):
     column_filters = ['name']
+    column_labels = dict(name='Genero')
+    form_args = dict(
+        genre=dict(label='Genero')
+    )
 
 
 class CoverView(ModelView):
@@ -119,14 +173,17 @@ def contact():
 
 if __name__ == '__main__':
     '''Create admin'''
-    admin = admin.Admin(app, 'Consultorio Teatro')
+    admin = admin.Admin(
+        app,
+        'Consultorio Teatro Admin'
+    )
 
     '''Add Views TODO'''
-    admin.add_view(MemberView(Member))
-    admin.add_view(TheatreView(Theatre))
-    admin.add_view(PlayView(Play))
-    admin.add_view(GenreView(Genre))
-    admin.add_view(CoverView(Cover))
+    admin.add_view(MemberView(Member, name='Integrantes'))
+    admin.add_view(TheatreView(Theatre, name='Salas'))
+    admin.add_view(PlayView(Play, name='Obras'))
+    admin.add_view(GenreView(Genre, name='Generos'))
+    admin.add_view(CoverView(Cover, name='Configuracion de Portada'))
 
     '''App Run'''
     app.run(debug=True)
