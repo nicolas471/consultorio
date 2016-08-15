@@ -119,7 +119,7 @@ class TheatreView(ModelView):
     column_editable_list = ['name']
     form_args = dict(
         borough=dict(label='Barrio'),
-        city=dict(label='Barrio'),
+        city=dict(label='Ciudad'),
         direction=dict(label='Direccion'),
         name=dict(label='Nombre')
     )
