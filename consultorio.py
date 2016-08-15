@@ -60,7 +60,6 @@ class Play(db.Document):
     genre = db.ReferenceField(Genre, required=True)
     current_theater = db.ReferenceField(Theatre, required=True)
     members = db.ListField(db.ReferenceField(Member))
-    '''FIXME'''
     book = db.ListField(db.ReferenceField('Image'))
 
     def __unicode__(self):
@@ -81,7 +80,7 @@ class Image(db.Document):
     def __unicode__(self):
         return self.name
 
-'''Admin Views TODO'''
+'''Admin Views '''
 
 
 class MemberView(ModelView):
@@ -132,7 +131,7 @@ class PlayView(ModelView):
         members='Elenco',
         release_date='Fecha de Estreno',
         current_theater='Sala Actual',
-        book='Libro?'
+        book='Catalogo'
     )
     column_searcheable_list = ['title']
     form_args = dict(
@@ -140,7 +139,10 @@ class PlayView(ModelView):
         members=dict(label='Elenco'),
         release_date=dict(label='Fecha de Estreno'),
         current_theater=dict(label='Sala Actual'),
-        book=dict(label='Libro')
+        book=dict(label='Catalogo')
+    )
+    column_descriptions = dict(
+        book='Catalogo de imagenes'
     )
 
 
@@ -196,7 +198,6 @@ if __name__ == '__main__':
         'Consultorio Teatro Admin'
     )
 
-    '''Add Views TODO'''
     admin.add_view(MemberView(Member, name='Integrantes'))
     admin.add_view(TheatreView(Theatre, name='Salas'))
     admin.add_view(PlayView(Play, name='Obras'))
