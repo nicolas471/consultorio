@@ -4,15 +4,19 @@ from flask import Flask, render_template
 from flask_mongoengine import MongoEngine
 from flask_admin.form import rules
 from flask_admin.contrib.mongoengine import ModelView
+from flask_babelex import Babel
 import flask_admin as admin
 
 '''App configuration'''
 
 app = Flask(__name__)
+babel = Babel(app)
 app.config['SECRET_KEY'] = '1234567890'
 app.config['MONGODB_SETTINGS'] = {
     'db': 'consultorio'
 }
+app.config['BABEL_DEFAULT_LOCALE'] = 'es'
+app.config['BABEL_DEFAULT_TIMEZONE'] = 'America/Argentina/Cordoba'
 
 ''' db init '''
 
