@@ -61,7 +61,7 @@ class Play(db.Document):
     current_theater = db.ReferenceField(Theatre, required=True)
     members = db.ListField(db.ReferenceField(Member))
     '''FIXME'''
-    book = db.ListField(db.ImageField())
+    book = db.ListField(db.ReferenceField('Image'))
 
     def __unicode__(self):
         return self.title
@@ -71,8 +71,15 @@ class Play(db.Document):
 class Cover(db.Document):
     '''FIXME'''
     num_images = db.IntField(required=True, max_value=3)
-    images = db.ListField(db.ImageField(), required=True)
+    images = db.ListField(db.ReferenceField('Image'), required=True)
 
+
+class Image(db.Document):
+    name = db.StringField(max_lenght=5)
+    image = db.ImageField(required=True)
+
+    def __unicode__(self):
+        return self.name
 
 '''Admin Views TODO'''
 
@@ -149,6 +156,17 @@ class CoverView(ModelView):
     pass
 
 
+class ImageView(ModelView):
+    column_labels = dict(
+        name='Nombre',
+        image='Imagen'
+    )
+    form_args = dict(
+        name=dict(label='Nombre'),
+        image=dict(label='Imagen')
+    )
+
+
 '''App Views'''
 
 
@@ -184,6 +202,7 @@ if __name__ == '__main__':
     admin.add_view(PlayView(Play, name='Obras'))
     admin.add_view(GenreView(Genre, name='Generos'))
     admin.add_view(CoverView(Cover, name='Configuracion de Portada'))
+    admin.add_view(ImageView(Image, name='Imagenes'))
 
     '''App Run'''
     app.run(debug=True)
