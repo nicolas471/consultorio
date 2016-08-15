@@ -2,7 +2,6 @@
 
 from flask import Flask, render_template
 from flask_mongoengine import MongoEngine
-from flask_admin.form import rules
 from flask_admin.contrib.mongoengine import ModelView
 from flask_babelex import Babel
 import flask_admin as admin
