@@ -36,7 +36,7 @@ class Member(db.Document):
                         'Actriz', 'Director', 'Tecnica'))
 
     def __unicode__(self):
-        return self.name
+        return '{0} {1}'.format(self.name, self.last_name)
 
 
 class Theatre(db.Document):
