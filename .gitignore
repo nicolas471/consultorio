@@ -68,3 +68,5 @@ target/
 # pyenv
 .python-version
 
+# sqlite3 db
+*.sqlite3
