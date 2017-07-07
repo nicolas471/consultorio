@@ -50,13 +50,6 @@ class Play(models.Model):
         return self.title
 
 
-# for index page configuration
-# class Cover(models.Model):
-    # '''FIXME'''
-    # num_images = models.IntField(required=True, max_value=3)
-    # images = db.ListField(db.ReferenceField('Image'))
-
-
 class Image(models.Model):
     name = models.CharField(max_length=50)
     image = models.ImageField(upload_to='images')
