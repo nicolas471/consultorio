@@ -40,7 +40,7 @@ class Genre(models.Model):
 
 class Play(models.Model):
     title = models.CharField(max_length=50)
-    release_date = models.DateTimeField()
+    release_date = models.DateField()
     genre = models.ForeignKey(Genre)
     current_theater = models.ForeignKey(Theatre)
     members = models.ManyToManyField(Member)
