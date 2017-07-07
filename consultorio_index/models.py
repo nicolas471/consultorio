@@ -9,14 +9,14 @@ class Member(models.Model):
     profile_picture = models.ForeignKey('Image')
     rol = models.ForeignKey('Rol')
 
-    def __unicode__(self):
+    def __str__(self):
         return '{0} {1}'.format(self.name, self.last_name)
 
 
 class Rol(models.Model):
     description = models.CharField(max_length=20)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.description
 
 
@@ -27,14 +27,14 @@ class Theatre(models.Model):
     city = models.CharField(max_length=15)
     email = models.EmailField()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
 class Genre(models.Model):
     name = models.CharField(max_length=15)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -46,7 +46,7 @@ class Play(models.Model):
     members = models.ManyToManyField(Member)
     pictures_book = models.ManyToManyField('Image')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 
@@ -61,5 +61,5 @@ class Image(models.Model):
     name = models.CharField(max_length=50)
     image = models.ImageField()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
