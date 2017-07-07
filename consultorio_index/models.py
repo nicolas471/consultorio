@@ -4,7 +4,7 @@ from django.db import models
 class Member(models.Model):
     name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
-    birthdate = models.DateTimeField()
+    birthdate = models.DateField()
     email = models.EmailField()
     profile_picture = models.ForeignKey('Image')
     rol = models.ForeignKey('Rol')
