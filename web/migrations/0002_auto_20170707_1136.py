@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('consultorio_index', '0001_initial'),
+        ('web', '0001_initial'),
     ]
 
     operations = [

@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
                 ('last_name', models.CharField(max_length=20)),
                 ('birthdate', models.DateTimeField()),
                 ('email', models.EmailField(max_length=254)),
-                ('profile_picture', models.ForeignKey(to='consultorio_index.Image')),
+                ('profile_picture', models.ForeignKey(to='web.Image')),
             ],
         ),
         migrations.CreateModel(
@@ -65,26 +65,26 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='play',
             name='current_theater',
-            field=models.ForeignKey(to='consultorio_index.Theatre'),
+            field=models.ForeignKey(to='web.Theatre'),
         ),
         migrations.AddField(
             model_name='play',
             name='genre',
-            field=models.ForeignKey(to='consultorio_index.Genre'),
+            field=models.ForeignKey(to='web.Genre'),
         ),
         migrations.AddField(
             model_name='play',
             name='members',
-            field=models.ManyToManyField(to='consultorio_index.Member'),
+            field=models.ManyToManyField(to='web.Member'),
         ),
         migrations.AddField(
             model_name='play',
             name='pictures_book',
-            field=models.ManyToManyField(to='consultorio_index.Image'),
+            field=models.ManyToManyField(to='web.Image'),
         ),
         migrations.AddField(
             model_name='member',
             name='rol',
-            field=models.ForeignKey(to='consultorio_index.Rol'),
+            field=models.ForeignKey(to='web.Rol'),
         ),
     ]
