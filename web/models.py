@@ -5,7 +5,7 @@ class Member(models.Model):
     name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     birthdate = models.DateField()
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     profile_picture = models.ForeignKey('Image')
     rol = models.ForeignKey('Rol')
 
@@ -14,7 +14,7 @@ class Member(models.Model):
 
 
 class Rol(models.Model):
-    description = models.CharField(max_length=20)
+    description = models.CharField(max_length=20, unique=True)
 
     def __str__(self):
         return self.description
@@ -32,14 +32,14 @@ class Theatre(models.Model):
 
 
 class Genre(models.Model):
-    name = models.CharField(max_length=15)
+    name = models.CharField(max_length=15, unique=True)
 
     def __str__(self):
         return self.name
 
 
 class Play(models.Model):
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=50, unique=True)
     release_date = models.DateField()
     genre = models.ForeignKey(Genre)
     current_theater = models.ForeignKey(Theatre)
