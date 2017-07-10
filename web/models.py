@@ -6,7 +6,7 @@ class Member(models.Model):
     last_name = models.CharField(max_length=20)
     birthdate = models.DateField()
     email = models.EmailField(unique=True)
-    profile_picture = models.ForeignKey('Image')
+    profile_picture = models.ImageField(upload_to='profiles')
     rol = models.ForeignKey('Rol')
 
     def __str__(self):
@@ -52,7 +52,7 @@ class Play(models.Model):
 
 class Image(models.Model):
     name = models.CharField(max_length=50)
-    image = models.ImageField(upload_to='images')
+    image = models.ImageField(upload_to='images/%Y/%m')
 
     def __str__(self):
         return self.name
